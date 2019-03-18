@@ -2,7 +2,9 @@
 namespace app\controllers;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use yii\helpers\Console;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -117,5 +119,23 @@ class PostService2
         }
 
         return $result;
+    }
+}
+
+/**
+ * Class User
+ *
+ * @property int $id
+ */
+class User extends ActiveRecord
+{
+
+}
+
+class PostRepository
+{
+    public function getPostsQuery(User $user): ActiveQuery
+    {
+        return Post::find()->where(['user_id' => $user->id]);
     }
 }
