@@ -1,0 +1,21 @@
+{
+    "name": "wowworks/phpconf",
+    "description": "Code examples",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "yiisoft/yii2": "@stable"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
