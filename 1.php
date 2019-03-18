@@ -62,4 +62,60 @@ class PostController extends Controller
             Console::error(sprintf('Post not created'));
         }
     }
+
+    public function actionCreateService($title, $content)
+    {
+        $service = Yii::createObject(PostService::class);
+        $model = new Post;
+
+        $model->title = $title;
+        $model->content = $content;
+        if ($service->createPost($model)) {
+            Console::output(sprintf('Post %d created', $model->id));
+        } else {
+            Console::error(sprintf('Post not created'));
+        }
+    }
+}
+
+class PostService
+{
+    public function createPost(Post $model)
+    {
+        $model->is_published = false;
+
+        return $model->save();
+    }
+}
+
+
+class NotificationService
+{
+    public function send(string $text): bool
+    {
+        // send some notification
+        return true;
+    }
+}
+
+class PostService2
+{
+    /** @var NotificationService */
+    private $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
+    public function createPost(Post $model): bool
+    {
+        $model->is_published = false;
+        $result = $model->save();
+        if ($result) {
+            $this->notificationService->send('New post created');
+        }
+
+        return $result;
+    }
 }
