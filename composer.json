@@ -13,6 +13,11 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=7.1",
         "yiisoft/yii2": "@stable"
