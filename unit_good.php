@@ -1,51 +1,13 @@
 <?php
 
-/**
- * Class Profile
- *
- * @property string $updated_at
- */
-class Profile extends \yii\db\ActiveRecord
-{
-    public function getUpdatedAtDateTime(): ?DateTime
-    {
-        return $this->updated_at ? new DateTime($this->updated_at) : null;
-    }
-}
-
-class DateHelper
-{
-    public function getDateTime(string $time = 'now'): DateTime
-    {
-        return new DateTime($time);
-    }
-}
-
-class ProfileService
-{
-    /** @var DateHelper */
-    private $dateHelper;
-
-    /**
-     * ProfileService constructor.
-     * @param DateHelper $dateHelper
-     */
-    public function __construct(DateHelper $dateHelper)
-    {
-        $this->dateHelper = $dateHelper;
-    }
-
-    public function isInactive(Profile $profile): bool
-    {
-        $date = $this->dateHelper->getDateTime('-3 month');
-        return $profile->getUpdatedAt() < $date;
-    }
-}
+use App\Entity\Profile;
+use App\Helper\DateHelper;
+use App\Service\ProfileService;
 
 class DateHelperMock extends DateHelper
 {
     /** @var DateInterval */
-    private $diff = '+0 day';
+    private $diff;
 
     public function setCurrentDate(string $date)
     {
@@ -56,7 +18,8 @@ class DateHelperMock extends DateHelper
 
     public function getDateTime(string $time = 'now'): DateTime
     {
-        return parent::getDateTime($time)->sub($this->diff);
+        $dateTime = parent::getDateTime($time);
+        return $this->diff ? $dateTime->add($this->diff) : $dateTime;
     }
 }
 
