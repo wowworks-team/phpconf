@@ -23,6 +23,7 @@
         "yiisoft/yii2": "@stable"
     },
     "require-dev": {
+        "mockery/mockery": "@stable",
         "phpunit/phpunit": "^7.5",
         "squizlabs/php_codesniffer": "@stable"
     },
