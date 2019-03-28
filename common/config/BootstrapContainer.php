@@ -21,9 +21,9 @@ class BootstrapContainer implements BootstrapInterface
                 'class' => JiraService::class,
             ],
             [
-                Yii::$app->params['jira']['host'],
-                Yii::$app->params['jira']['user'],
-                Yii::$app->params['jira']['token'],
+                $app->params['jira']['host'],
+                $app->params['jira']['user'],
+                $app->params['jira']['token'],
             ]
         );
     }
