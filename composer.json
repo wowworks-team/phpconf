@@ -10,7 +10,8 @@
             "vendor/yiisoft/yii2/Yii.php"
         ],
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "common\\": "common/"
         }
     },
     "autoload-dev": {
