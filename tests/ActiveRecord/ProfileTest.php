@@ -3,11 +3,10 @@
 namespace App\Tests\ActiveRecord;
 
 use App\ActiveRecord\Profile;
-use Mockery;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\TestCase;
-use Exception;
 use DateTime;
+use Exception;
+use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class ProfileTest extends TestCase
 {
