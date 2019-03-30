@@ -122,6 +122,49 @@ class PostService2
     }
 }
 
+class VkService {}
+class InstagramService {}
+class StatisticsService {}
+
+class PostService3
+{
+    /** @var NotificationService */
+    private $notificationService;
+
+    /** @var VkService */
+    private $vkService;
+
+    /** @var InstagramService */
+    private $instagramService;
+
+    /** @var StatisticsService */
+    private $statisticsService;
+
+    public function __construct(
+        NotificationService $notificationService,
+        VkService $vkService,
+        InstagramService $instagramService,
+        StatisticsService $statisticsService
+    ) {
+        $this->notificationService = $notificationService;
+        $this->vkService = $vkService;
+        $this->instagramService = $instagramService;
+        $this->statisticsService = $statisticsService;
+    }
+
+    public function createPost(Post $model): bool
+    {
+        $model->is_published = false;
+        $result = $model->save();
+        if ($result) {
+            $this->notificationService->send('New post created');
+            // and new extra logic
+        }
+
+        return $result;
+    }
+}
+
 /**
  * Class User
  *
@@ -139,3 +182,10 @@ class PostRepository
         return Post::find()->where(['user_id' => $user->id]);
     }
 }
+
+$notificationService = new NotificationService(/* with some settings */);
+$vkService = new VkService(/* with API key*/);
+$instagramService = new InstagramService(/* with API key*/);
+$statisticsService = new StatisticsService(/* with settings */);
+
+new PostService3($notificationService, $vkService, $instagramService, $statisticsService);
