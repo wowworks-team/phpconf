@@ -3,25 +3,7 @@
 use App\Entity\Profile;
 use App\Helper\DateHelper;
 use App\Service\ProfileService;
-
-class DateHelperMock extends DateHelper
-{
-    /** @var DateInterval */
-    private $diff;
-
-    public function setCurrentDate(string $date)
-    {
-        $today = $this->getDateTime();
-        $newDate = $this->getDateTime($date);
-        $this->diff = $today->diff($newDate);
-    }
-
-    public function getDateTime(string $time = null): DateTime
-    {
-        $dateTime = parent::getDateTime($time);
-        return $this->diff ? $dateTime->add($this->diff) : $dateTime;
-    }
-}
+use App\Tests\Mock\DateHelperMock;
 
 class ProfileTest extends \PHPUnit\Framework\TestCase
 {
