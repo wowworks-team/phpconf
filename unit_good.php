@@ -16,7 +16,7 @@ class DateHelperMock extends DateHelper
         $this->diff = $today->diff($newDate);
     }
 
-    public function getDateTime(string $time = 'now'): DateTime
+    public function getDateTime(string $time = null): DateTime
     {
         $dateTime = parent::getDateTime($time);
         return $this->diff ? $dateTime->add($this->diff) : $dateTime;
