@@ -10,6 +10,26 @@ use yii\web\NotFoundHttpException;
 
 class PostController extends Controller
 {
+    /** @var Post */
+    protected $post;
+
+    /** @var PostRepository */
+    protected $postRepository;
+
+    // https://www.yiiframework.com/doc/guide/2.0/en/concept-di-container
+    public function __construct(
+        $id,
+        $module,
+        Post $post,
+        PostRepository $postRepository,
+        $config = []
+    ) {
+        $this->post = $post;
+        $this->postRepository = $postRepository;
+
+        parent::__construct($id, $module, $config);
+    }
+
     public function actionView($id)
     {
         $model = $this->getRepository()->findOne((int) $id);
@@ -38,18 +58,12 @@ class PostController extends Controller
 
     protected function getRepository(): PostRepository
     {
-        /** @var PostRepository $service */
-        $service = Yii::createObject(PostRepository::class);
-
-        return $service;
+        return $this->postRepository;
     }
 
     protected function getModel(): Post
     {
-        /** @var Post $object */
-        $object = Yii::createObject(Post::class);
-
-        return $object;
+        return $this->post;
     }
 
     /**
