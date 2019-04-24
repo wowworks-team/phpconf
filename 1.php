@@ -25,6 +25,21 @@ class Post extends ActiveRecord
 // https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
 class PostController extends Controller
 {
+
+    /** @var PostService */
+    protected $postService;
+
+    public function __construct(
+        $id,
+        $module,
+        PostService $postService,
+        $config = []
+    ) {
+        $this->postService = $postService;
+
+        parent::__construct($id, $module, $config);
+    }
+
     public function actionView($id)
     {
         $model = Post::findOne($id);
@@ -67,7 +82,7 @@ class PostController extends Controller
 
     public function actionCreateService($title, $content)
     {
-        $service = Yii::createObject(PostService::class);
+        $service = $this->getPostService();
         $model = new Post;
 
         $model->title = $title;
@@ -77,6 +92,11 @@ class PostController extends Controller
         } else {
             Console::error(sprintf('Post not created'));
         }
+    }
+
+    protected function getPostService(): PostService
+    {
+        return $this->postService;
     }
 }
 
