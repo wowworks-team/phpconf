@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Create;
 
 use App\ActiveRecord\Post;
 use App\Repository\PostRepository;
