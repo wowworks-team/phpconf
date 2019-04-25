@@ -11,6 +11,11 @@ use yii\web\NotFoundHttpException;
 
 class PostControllerTest extends TestCase
 {
+    protected function tearDown()
+    {
+        Mockery::close(); // https://github.com/mockery/mockery#method-call-expectations-
+    }
+
     /**
      * @covers \App\Controller\PostController::actionView
      */
