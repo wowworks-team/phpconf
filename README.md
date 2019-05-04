@@ -1,6 +1,6 @@
 ## Slides
 
-[slides](Slides)
+[Slides](slides)
 
 ## Examples
 
