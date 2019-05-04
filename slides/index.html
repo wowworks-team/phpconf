@@ -70,18 +70,33 @@ HOTKEYS:
         </section>
 
         <section>
-            <p class="fragment">Я занимался аудитом кода многих проектов...</p>
-            <p class="fragment">... и практически всегда встречал всё те же ошибки.</p>
+            <img src="images/mvc.jpg" alt="">
         </section>
 
         <section>
-            <h2>Главная идея в том...</h2>
+            <h2>Controller</h2>
         </section>
 
         <section>
-            <h2>Что нельзя доверять данным не смотря ни на что</h2>
+            <h2>Пример из документации</h2>
 
-            <img src="locks.jpg" alt="">
+            <pre><code>
+// https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
+class PostController extends Controller
+{
+    public function actionView($id)
+    {
+        $model = Post::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException;
+        }
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+}
+            </code></pre>
         </section>
 
         <section>
